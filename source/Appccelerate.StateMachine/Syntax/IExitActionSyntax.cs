@@ -31,15 +31,17 @@ namespace Appccelerate.StateMachine.Syntax
         /// Defines an exit action.
         /// </summary>
         /// <param name="action">The action.</param>
+        /// <param name="description">The description.</param>
         /// <returns>Event syntax.</returns>
         IExitActionSyntax<TState, TEvent> ExecuteOnExit(Action action, string description = null);
 
         /// <summary>
         /// Defines an exit action.
         /// </summary>
-        /// <param name="action">The action.</param>
-        /// <returns>Event syntax.</returns>
         /// <typeparam name="T">Type of the event argument passed to the action.</typeparam>
+        /// <param name="action">The action.</param>
+        /// <param name="description">The description.</param>
+        /// <returns>Event syntax.</returns>
         IExitActionSyntax<TState, TEvent> ExecuteOnExit<T>(Action<T> action, string description = null);
 
         /// <summary>
@@ -48,6 +50,7 @@ namespace Appccelerate.StateMachine.Syntax
         /// <typeparam name="T">Type of the parameter of the exit action method.</typeparam>
         /// <param name="action">The action.</param>
         /// <param name="parameter">The parameter that will be passed to the exit action.</param>
+        /// <param name="description">The description.</param>
         /// <returns>Exit action syntax.</returns>
         IExitActionSyntax<TState, TEvent> ExecuteOnExitParametrized<T>(Action<T> action, T parameter, string description = null);
     }

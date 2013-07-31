@@ -39,7 +39,7 @@ namespace Appccelerate.StateMachine.Machine.ActionHolders
         [Fact]
         public void MatchingType()
         {
-            var testee = new ArgumentActionHolder<IBase>(BaseAction);
+            var testee = new ArgumentActionHolder<IBase>(BaseAction, null);
             
             testee.Execute(A.Fake<IBase>());
         }
@@ -47,7 +47,7 @@ namespace Appccelerate.StateMachine.Machine.ActionHolders
         [Fact]
         public void DerivedType()
         {
-            var testee = new ArgumentActionHolder<IBase>(BaseAction);
+            var testee = new ArgumentActionHolder<IBase>(BaseAction, null);
 
             testee.Execute(A.Fake<IDerived>());
         }
@@ -55,7 +55,7 @@ namespace Appccelerate.StateMachine.Machine.ActionHolders
         [Fact]
         public void NonMatchingType()
         {
-            var testee = new ArgumentActionHolder<IBase>(BaseAction);
+            var testee = new ArgumentActionHolder<IBase>(BaseAction, null);
 
             Action action = () => { testee.Execute(3); };
 
@@ -65,7 +65,7 @@ namespace Appccelerate.StateMachine.Machine.ActionHolders
         [Fact]
         public void TooManyArguments()
         {
-            var testee = new ArgumentActionHolder<IBase>(BaseAction);
+            var testee = new ArgumentActionHolder<IBase>(BaseAction, null);
 
             Action action = () => { testee.Execute(new object[] { 3, 4 }); };
 
@@ -75,7 +75,7 @@ namespace Appccelerate.StateMachine.Machine.ActionHolders
         [Fact]
         public void TooFewArguments()
         {
-            var testee = new ArgumentActionHolder<IBase>(BaseAction);
+            var testee = new ArgumentActionHolder<IBase>(BaseAction, null);
 
             Action action = () => { testee.Execute(new object[] { }); };
 

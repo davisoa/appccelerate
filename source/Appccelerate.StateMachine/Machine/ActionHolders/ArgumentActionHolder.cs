@@ -28,7 +28,7 @@ namespace Appccelerate.StateMachine.Machine.ActionHolders
         private readonly Action<T> action;
         private readonly string description;
 
-        public ArgumentActionHolder(Action<T> action, string description = null)
+        public ArgumentActionHolder(Action<T> action, string description)
         {
             this.action = action;
             this.description = description;

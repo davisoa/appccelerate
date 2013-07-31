@@ -30,7 +30,7 @@ namespace Appccelerate.StateMachine.Machine.ActionHolders
 
         private readonly string description;
 
-        public ParametrizedActionHolder(Action<T> action, T parameter, string description = null)
+        public ParametrizedActionHolder(Action<T> action, T parameter, string description)
         {
             this.action = action;
             this.parameter = parameter;

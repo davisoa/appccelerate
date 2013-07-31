@@ -35,7 +35,7 @@ namespace Appccelerate.StateMachine.Machine.GuardHolders
         /// </summary>
         /// <param name="guard">The guard.</param>
         /// <param name="description">The description of the guard.</param>
-        public ArgumentGuardHolder(Func<T, bool> guard, string description = null)
+        public ArgumentGuardHolder(Func<T, bool> guard, string description)
         {
             this.guard = guard;
             this.description = description;

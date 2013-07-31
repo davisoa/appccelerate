@@ -36,7 +36,7 @@ namespace Appccelerate.StateMachine.Machine.GuardHolders
         {
             this.guardExecuted = false;
             Func<IBase, bool> guard = v => this.guardExecuted = true;
-            this.testee = new ArgumentGuardHolder<IBase>(guard);
+            this.testee = new ArgumentGuardHolder<IBase>(guard, null);
         }
 
         public interface IBase

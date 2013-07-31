@@ -34,7 +34,8 @@ namespace Appccelerate.StateMachine.Machine.GuardHolders
         /// Initializes a new instance of the <see cref="ArgumentLessGuardHolder"/> class.
         /// </summary>
         /// <param name="guard">The guard.</param>
-        public ArgumentLessGuardHolder(Func<bool> guard, string description = null)
+        /// <param name="description">The description.</param>
+        public ArgumentLessGuardHolder(Func<bool> guard, string description)
         {
             this.guard = guard;
             this.description = description;
