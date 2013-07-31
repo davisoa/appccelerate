@@ -89,7 +89,7 @@ namespace Appccelerate.StateMachine.Machine.ActionHolders
 
             Func<string> func = () => testee.Describe();
 
-            func.ShouldBeEquivalentTo("BaseAction");
+            func().ShouldBeEquivalentTo("BaseAction");
         }
 
         [Fact]
@@ -99,7 +99,7 @@ namespace Appccelerate.StateMachine.Machine.ActionHolders
 
             Func<string> func = () => testee.Describe();
 
-            func.ShouldBeEquivalentTo("My Description");
+            func().ShouldBeEquivalentTo("My Description");
         }
 
         private static void BaseAction(IBase b)
