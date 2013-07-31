@@ -82,6 +82,26 @@ namespace Appccelerate.StateMachine.Machine.ActionHolders
             action.ShouldThrow<ArgumentException>();
         }
 
+        [Fact]
+        public void EmptyDescription()
+        {
+            var testee = new ArgumentActionHolder<IBase>(BaseAction, null);
+
+            Func<string> func = () => testee.Describe();
+
+            func.ShouldBeEquivalentTo("BaseAction");
+        }
+
+        [Fact]
+        public void PopulatedDescription()
+        {
+            var testee = new ArgumentActionHolder<IBase>(BaseAction, "My Description");
+
+            Func<string> func = () => testee.Describe();
+
+            func.ShouldBeEquivalentTo("My Description");
+        }
+
         private static void BaseAction(IBase b)
         {
         }
