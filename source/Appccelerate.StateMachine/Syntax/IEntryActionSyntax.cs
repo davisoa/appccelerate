@@ -32,7 +32,7 @@ namespace Appccelerate.StateMachine.Syntax
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>Exit action syntax.</returns>
-        IEntryActionSyntax<TState, TEvent> ExecuteOnEntry(Action action);
+        IEntryActionSyntax<TState, TEvent> ExecuteOnEntry(Action action, string description = null);
 
         /// <summary>
         /// Defines an entry action.
@@ -40,7 +40,7 @@ namespace Appccelerate.StateMachine.Syntax
         /// <param name="action">The action.</param>
         /// <returns>Exit action syntax.</returns>
         /// <typeparam name="T">Type of the event argument passed to the action.</typeparam>
-        IEntryActionSyntax<TState, TEvent> ExecuteOnEntry<T>(Action<T> action);
+        IEntryActionSyntax<TState, TEvent> ExecuteOnEntry<T>(Action<T> action, string description = null);
 
         /// <summary>
         /// Defines an entry action.
@@ -49,6 +49,6 @@ namespace Appccelerate.StateMachine.Syntax
         /// <param name="action">The action.</param>
         /// <param name="parameter">The parameter that will be passed to the entry action.</param>
         /// <returns>Exit action syntax.</returns>
-        IEntryActionSyntax<TState, TEvent> ExecuteOnEntryParametrized<T>(Action<T> action, T parameter);
+        IEntryActionSyntax<TState, TEvent> ExecuteOnEntryParametrized<T>(Action<T> action, T parameter, string description = null);
     }
 }

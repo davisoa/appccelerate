@@ -55,39 +55,39 @@ namespace Appccelerate.StateMachine.Machine
             return new Transition<TState, TEvent>(this.stateMachineInformation, this.extensionHost);
         }
 
-        public virtual IActionHolder CreateActionHolder(Action action)
+        public virtual IActionHolder CreateActionHolder(Action action, string description = null)
         {
-            return new ArgumentLessActionHolder(action);
+            return new ArgumentLessActionHolder(action, description);
         }
 
-        public virtual IActionHolder CreateActionHolder<T>(Action<T> action)
+        public virtual IActionHolder CreateActionHolder<T>(Action<T> action, string description = null)
         {
-            return new ArgumentActionHolder<T>(action);
+            return new ArgumentActionHolder<T>(action, description);
         }
 
-        public virtual IActionHolder CreateActionHolder<T>(Action<T> action, T parameter)
+        public virtual IActionHolder CreateActionHolder<T>(Action<T> action, T parameter, string description = null)
         {
-            return new ParametrizedActionHolder<T>(action, parameter);    
+            return new ParametrizedActionHolder<T>(action, parameter, description);
         }
 
-        public virtual IActionHolder CreateTransitionActionHolder(Action action)
+        public virtual IActionHolder CreateTransitionActionHolder(Action action, string description = null)
         {
-            return new ArgumentLessActionHolder(action);
+            return new ArgumentLessActionHolder(action, description);
         }
 
-        public virtual IActionHolder CreateTransitionActionHolder<T>(Action<T> action)
+        public virtual IActionHolder CreateTransitionActionHolder<T>(Action<T> action, string description = null)
         {
-            return new ArgumentActionHolder<T>(action);
-        }
-        
-        public virtual IGuardHolder CreateGuardHolder(Func<bool> guard)
-        {
-            return new ArgumentLessGuardHolder(guard);
+            return new ArgumentActionHolder<T>(action, description);
         }
 
-        public virtual IGuardHolder CreateGuardHolder<T>(Func<T, bool> guard)
+        public virtual IGuardHolder CreateGuardHolder(Func<bool> guard, string description = null)
         {
-            return new ArgumentGuardHolder<T>(guard);
+            return new ArgumentLessGuardHolder(guard, description);
+        }
+
+        public virtual IGuardHolder CreateGuardHolder<T>(Func<T, bool> guard, string description = null)
+        {
+            return new ArgumentGuardHolder<T>(guard, description);
         }
 
         public virtual ITransitionContext<TState, TEvent> CreateTransitionContext(IState<TState, TEvent> state, Missable<TEvent> eventId, object eventArgument, INotifier<TState, TEvent> notifier)

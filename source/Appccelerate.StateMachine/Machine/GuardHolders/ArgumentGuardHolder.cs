@@ -28,14 +28,17 @@ namespace Appccelerate.StateMachine.Machine.GuardHolders
     public class ArgumentGuardHolder<T> : IGuardHolder
     {
         private readonly Func<T, bool> guard;
+        private readonly string description;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentGuardHolder{T}"/> class.
+        /// Initializes a new instance of the <see cref="ArgumentGuardHolder{T}" /> class.
         /// </summary>
         /// <param name="guard">The guard.</param>
-        public ArgumentGuardHolder(Func<T, bool> guard)
+        /// <param name="description">The description of the guard.</param>
+        public ArgumentGuardHolder(Func<T, bool> guard, string description = null)
         {
             this.guard = guard;
+            this.description = description;
         }
 
         /// <summary>
@@ -59,7 +62,14 @@ namespace Appccelerate.StateMachine.Machine.GuardHolders
         /// <returns>Description of the guard.</returns>
         public string Describe()
         {
-            return this.guard.Method.GetCustomAttributes(typeof(CompilerGeneratedAttribute), false).Any() ? "anonymous" : this.guard.Method.Name;
+            if (!string.IsNullOrEmpty(this.description))
+            {
+                return this.description;
+            }
+            else
+            {
+                return this.guard.Method.GetCustomAttributes(typeof(CompilerGeneratedAttribute), false).Any() ? "anonymous" : this.guard.Method.Name;
+            }
         }
     }
 }

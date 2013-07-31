@@ -25,10 +25,12 @@ namespace Appccelerate.StateMachine.Machine.ActionHolders
     public class ArgumentLessActionHolder : IActionHolder
     {
         private readonly Action action;
+        private readonly string description;
 
-        public ArgumentLessActionHolder(Action action)
+        public ArgumentLessActionHolder(Action action, string description = null)
         {
             this.action = action;
+            this.description = description;
         }
 
         public void Execute(object argument)
@@ -38,7 +40,14 @@ namespace Appccelerate.StateMachine.Machine.ActionHolders
 
         public string Describe()
         {
-            return this.action.Method.GetCustomAttributes(typeof(CompilerGeneratedAttribute), false).Any() ? "anonymous" : this.action.Method.Name;
+            if (!string.IsNullOrEmpty(this.description))
+            {
+                return this.description;
+            }
+            else
+            {
+                return this.action.Method.GetCustomAttributes(typeof(CompilerGeneratedAttribute), false).Any() ? "anonymous" : this.action.Method.Name;
+            }
         }
     }
 }

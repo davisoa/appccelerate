@@ -29,7 +29,7 @@ namespace Appccelerate.StateMachine.Machine
     /// </summary>
     /// <typeparam name="TState">The type of the state.</typeparam>
     /// <typeparam name="TEvent">The type of the event.</typeparam>
-    public sealed class StateBuilder<TState, TEvent> : 
+    public sealed class StateBuilder<TState, TEvent> :
         IEntryActionSyntax<TState, TEvent>,
         IGotoInIfSyntax<TState, TEvent>,
         IOtherwiseSyntax<TState, TEvent>,
@@ -68,20 +68,20 @@ namespace Appccelerate.StateMachine.Machine
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>Exit action syntax.</returns>
-        IEntryActionSyntax<TState, TEvent> IEntryActionSyntax<TState, TEvent>.ExecuteOnEntry(Action action)
+        IEntryActionSyntax<TState, TEvent> IEntryActionSyntax<TState, TEvent>.ExecuteOnEntry(Action action, string description)
         {
             Ensure.ArgumentNotNull(action, "action");
 
-            this.state.EntryActions.Add(this.factory.CreateActionHolder(action));    
-            
+            this.state.EntryActions.Add(this.factory.CreateActionHolder(action, description));
+
             return this;
         }
 
-        public IEntryActionSyntax<TState, TEvent> ExecuteOnEntry<T>(Action<T> action)
+        public IEntryActionSyntax<TState, TEvent> ExecuteOnEntry<T>(Action<T> action, string description)
         {
             Ensure.ArgumentNotNull(action, "action");
 
-            this.state.EntryActions.Add(this.factory.CreateActionHolder(action));
+            this.state.EntryActions.Add(this.factory.CreateActionHolder(action, description));
 
             return this;
         }
@@ -93,9 +93,9 @@ namespace Appccelerate.StateMachine.Machine
         /// <param name="action">The action.</param>
         /// <param name="parameter">The parameter that will be passed to the entry action.</param>
         /// <returns>Exit action syntax.</returns>
-        IEntryActionSyntax<TState, TEvent> IEntryActionSyntax<TState, TEvent>.ExecuteOnEntryParametrized<T>(Action<T> action, T parameter)
+        IEntryActionSyntax<TState, TEvent> IEntryActionSyntax<TState, TEvent>.ExecuteOnEntryParametrized<T>(Action<T> action, T parameter, string description)
         {
-            this.state.EntryActions.Add(this.factory.CreateActionHolder(action, parameter));
+            this.state.EntryActions.Add(this.factory.CreateActionHolder(action, parameter, description));
 
             return this;
         }
@@ -105,20 +105,20 @@ namespace Appccelerate.StateMachine.Machine
         /// </summary>
         /// <param name="action">The action.</param>
         /// <returns>Event syntax.</returns>
-        IExitActionSyntax<TState, TEvent> IExitActionSyntax<TState, TEvent>.ExecuteOnExit(Action action)
+        IExitActionSyntax<TState, TEvent> IExitActionSyntax<TState, TEvent>.ExecuteOnExit(Action action, string description)
         {
             Ensure.ArgumentNotNull(action, "action");
 
-            this.state.ExitActions.Add(this.factory.CreateActionHolder(action));
-            
+            this.state.ExitActions.Add(this.factory.CreateActionHolder(action, description));
+
             return this;
         }
 
-        public IExitActionSyntax<TState, TEvent> ExecuteOnExit<T>(Action<T> action)
+        public IExitActionSyntax<TState, TEvent> ExecuteOnExit<T>(Action<T> action, string description)
         {
             Ensure.ArgumentNotNull(action, "action");
 
-            this.state.ExitActions.Add(this.factory.CreateActionHolder(action));
+            this.state.ExitActions.Add(this.factory.CreateActionHolder(action, description));
 
             return this;
         }
@@ -129,10 +129,13 @@ namespace Appccelerate.StateMachine.Machine
         /// <typeparam name="T">Type of the parameter of the exit action method.</typeparam>
         /// <param name="action">The action.</param>
         /// <param name="parameter">The parameter that will be passed to the exit action.</param>
-        /// <returns>Exit action syntax.</returns>
-        IExitActionSyntax<TState, TEvent> IExitActionSyntax<TState, TEvent>.ExecuteOnExitParametrized<T>(Action<T> action, T parameter)
+        /// <param name="description">The description.</param>
+        /// <returns>
+        /// Exit action syntax.
+        /// </returns>
+        IExitActionSyntax<TState, TEvent> IExitActionSyntax<TState, TEvent>.ExecuteOnExitParametrized<T>(Action<T> action, T parameter, string description)
         {
-            this.state.ExitActions.Add(this.factory.CreateActionHolder(action, parameter));
+            this.state.ExitActions.Add(this.factory.CreateActionHolder(action, parameter, description));
 
             return this;
         }
@@ -271,7 +274,7 @@ namespace Appccelerate.StateMachine.Machine
         private StateBuilder<TState, TEvent> ExecuteInternal(Action action)
         {
             this.currentTransition.Actions.Add(this.factory.CreateTransitionActionHolder(action));
-            
+
             this.CheckGuards();
 
             return this;
@@ -280,7 +283,7 @@ namespace Appccelerate.StateMachine.Machine
         private StateBuilder<TState, TEvent> ExecuteInternal<T>(Action<T> action)
         {
             this.currentTransition.Actions.Add(this.factory.CreateTransitionActionHolder(action));
-            
+
             this.CheckGuards();
 
             return this;
@@ -352,9 +355,9 @@ namespace Appccelerate.StateMachine.Machine
                 throw new InvalidOperationException(ExceptionMessages.OnlyOneTransitionMayHaveNoGuard);
             }
 
-            if ((from grouping in transitionsByEvent 
-                 let transition = grouping.SingleOrDefault(t => t.Guard == null) 
-                 where transition != null && grouping.LastOrDefault() != transition 
+            if ((from grouping in transitionsByEvent
+                 let transition = grouping.SingleOrDefault(t => t.Guard == null)
+                 where transition != null && grouping.LastOrDefault() != transition
                  select grouping).Any())
             {
                 throw new InvalidOperationException(ExceptionMessages.TransitionWithoutGuardHasToBeLast);
