@@ -276,7 +276,7 @@ namespace Appccelerate.StateMachine.Machine
 
         private StateBuilder<TState, TEvent> ExecuteInternal(Action action)
         {
-            this.currentTransition.Actions.Add(this.factory.CreateTransitionActionHolder(action));
+            this.currentTransition.Actions.Add(this.factory.CreateTransitionActionHolder(action, null));
 
             this.CheckGuards();
 
@@ -285,7 +285,7 @@ namespace Appccelerate.StateMachine.Machine
 
         private StateBuilder<TState, TEvent> ExecuteInternal<T>(Action<T> action)
         {
-            this.currentTransition.Actions.Add(this.factory.CreateTransitionActionHolder(action));
+            this.currentTransition.Actions.Add(this.factory.CreateTransitionActionHolder(action, null));
 
             this.CheckGuards();
 
@@ -333,12 +333,12 @@ namespace Appccelerate.StateMachine.Machine
 
         private void SetGuard<T>(Func<T, bool> guard)
         {
-            this.currentTransition.Guard = this.factory.CreateGuardHolder(guard);
+            this.currentTransition.Guard = this.factory.CreateGuardHolder(guard, null);
         }
 
         private void SetGuard(Func<bool> guard)
         {
-            this.currentTransition.Guard = this.factory.CreateGuardHolder(guard);
+            this.currentTransition.Guard = this.factory.CreateGuardHolder(guard, null);
         }
 
         private void SetTargetState(TState target)

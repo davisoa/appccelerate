@@ -31,19 +31,19 @@ namespace Appccelerate.StateMachine.Machine.Events
 
         ITransition<TState, TEvent> CreateTransition();
 
-        IActionHolder CreateActionHolder(Action action, string description = null);
+        IActionHolder CreateActionHolder(Action action, string description);
 
-        IActionHolder CreateActionHolder<T>(Action<T> action, string description = null);
+        IActionHolder CreateActionHolder<T>(Action<T> action, string description);
 
-        IActionHolder CreateActionHolder<T>(Action<T> action, T parameter, string description = null);
+        IActionHolder CreateActionHolder<T>(Action<T> action, T parameter, string description);
 
-        IActionHolder CreateTransitionActionHolder(Action action, string description = null);
+        IActionHolder CreateTransitionActionHolder(Action action, string description);
 
-        IActionHolder CreateTransitionActionHolder<T>(Action<T> action, string description = null);
+        IActionHolder CreateTransitionActionHolder<T>(Action<T> action, string description);
 
-        IGuardHolder CreateGuardHolder(Func<bool> guard, string description = null);
+        IGuardHolder CreateGuardHolder(Func<bool> guard, string description);
 
-        IGuardHolder CreateGuardHolder<T>(Func<T, bool> guard, string description = null);
+        IGuardHolder CreateGuardHolder<T>(Func<T, bool> guard, string description);
         
         ITransitionContext<TState, TEvent> CreateTransitionContext(IState<TState, TEvent> state, Missable<TEvent> eventId, object eventArgument, INotifier<TState, TEvent> notifier);
 

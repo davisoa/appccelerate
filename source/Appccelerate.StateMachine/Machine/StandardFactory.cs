@@ -55,37 +55,37 @@ namespace Appccelerate.StateMachine.Machine
             return new Transition<TState, TEvent>(this.stateMachineInformation, this.extensionHost);
         }
 
-        public virtual IActionHolder CreateActionHolder(Action action, string description = null)
+        public virtual IActionHolder CreateActionHolder(Action action, string description)
         {
             return new ArgumentLessActionHolder(action, description);
         }
 
-        public virtual IActionHolder CreateActionHolder<T>(Action<T> action, string description = null)
+        public virtual IActionHolder CreateActionHolder<T>(Action<T> action, string description)
         {
             return new ArgumentActionHolder<T>(action, description);
         }
 
-        public virtual IActionHolder CreateActionHolder<T>(Action<T> action, T parameter, string description = null)
+        public virtual IActionHolder CreateActionHolder<T>(Action<T> action, T parameter, string description)
         {
             return new ParametrizedActionHolder<T>(action, parameter, description);
         }
 
-        public virtual IActionHolder CreateTransitionActionHolder(Action action, string description = null)
+        public virtual IActionHolder CreateTransitionActionHolder(Action action, string description)
         {
             return new ArgumentLessActionHolder(action, description);
         }
 
-        public virtual IActionHolder CreateTransitionActionHolder<T>(Action<T> action, string description = null)
+        public virtual IActionHolder CreateTransitionActionHolder<T>(Action<T> action, string description)
         {
             return new ArgumentActionHolder<T>(action, description);
         }
 
-        public virtual IGuardHolder CreateGuardHolder(Func<bool> guard, string description = null)
+        public virtual IGuardHolder CreateGuardHolder(Func<bool> guard, string description)
         {
             return new ArgumentLessGuardHolder(guard, description);
         }
 
-        public virtual IGuardHolder CreateGuardHolder<T>(Func<T, bool> guard, string description = null)
+        public virtual IGuardHolder CreateGuardHolder<T>(Func<T, bool> guard, string description)
         {
             return new ArgumentGuardHolder<T>(guard, description);
         }
