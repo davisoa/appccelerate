@@ -39,7 +39,7 @@ namespace Appccelerate.StateMachine.Machine.Transitions
 
             this.exception = new Exception();
 
-            this.Testee.Actions.Add(new ArgumentLessActionHolder(() => { throw this.exception; }));
+            this.Testee.Actions.Add(new ArgumentLessActionHolder(() => { throw this.exception; }, string.Empty));
         }
 
         [Fact]

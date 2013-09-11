@@ -38,7 +38,7 @@ namespace Appccelerate.StateMachine.Machine.Transitions
         {
             bool executed = false;
 
-            this.Testee.Actions.Add(new ArgumentLessActionHolder(() => executed = true));
+            this.Testee.Actions.Add(new ArgumentLessActionHolder(() => executed = true, string.Empty));
 
             this.Testee.Fire(this.TransitionContext);
 
